@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #05060f;
+  --color-navy-900: #0a0d1f;
+  --color-navy-800: #0f1430;
+  --color-navy-700: #171c40;
+  --color-navy-600: #232a56;
+  --color-blue-primary: #0049ff;
+  --color-blue-light: #4d7bff;
+  --color-blue-glow: #7ea0ff;
+  --color-surface: #f4f6fb;
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+
+  --font-sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-navy-950);
+  color: #e7eaf6;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(0, 73, 255, 0.35);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-navy-950);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy-700);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-blue-primary);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+.pulse-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up {
+  animation: fade-in-up 0.35s ease-out both;
+}

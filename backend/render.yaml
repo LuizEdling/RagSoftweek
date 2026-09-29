@@ -1,0 +1,44 @@
+# Blueprint para deploy no Render (https://render.com).
+# No painel: New -> Blueprint -> aponte para este repositório.
+# Depois preencha as variáveis marcadas como "sync: false" manualmente
+# (nunca ficam salvas no repositório).
+services:
+  - type: web
+    name: rag-lab-backend
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: QDRANT_COLLECTION
+        value: rag_lab_documents
+      - key: EMBEDDING_PROVIDER
+        value: mock
+      - key: EMBEDDING_API_KEY
+        sync: false
+      - key: EMBEDDING_MODEL
+        sync: false
+      - key: EMBEDDING_DIMENSIONS
+        value: "768"
+      - key: LLM_PROVIDER
+        value: mock
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        sync: false
+      - key: RERANKER_MODE
+        value: heuristic
+      - key: RERANKER_API_KEY
+        sync: false
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "10"
+      - key: MAX_QUESTION_LENGTH
+        value: "500"
+      - key: CORS_ORIGINS
+        sync: false
