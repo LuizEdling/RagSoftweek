@@ -137,6 +137,30 @@ class VectorStore:
             return self._search_real(embedding, top_k)
         return self._search_mock(question, top_k)
 
+    def keyword_search(self, question: str, top_k: int) -> list[RetrievalItem]:
+        """Busca lexical pura: só conta palavras iguais (sem radical, sem
+        ruído). Serve de contraponto à busca vetorial no exercício de busca
+        semântica — documentos sem nenhuma palavra em comum nem aparecem."""
+        q_tokens = set(_tokenize(question))
+        if not q_tokens:
+            return []
+        scored = []
+        for doc in load_documents():
+            doc_tokens = set(_tokenize(doc.title + " " + doc.content + " " + " ".join(doc.tags)))
+            hits = len(q_tokens & doc_tokens)
+            if hits == 0:
+                continue
+            scored.append(
+                RetrievalItem(
+                    document_id=doc.id,
+                    filename=doc.filename,
+                    title=doc.title,
+                    similarity=round(hits / len(q_tokens), 2),
+                )
+            )
+        scored.sort(key=lambda x: (-x.similarity, x.filename))
+        return scored[:top_k]
+
     def _search_real(self, embedding: list[float], top_k: int) -> list[RetrievalItem]:
         results = self._client.query_points(
             collection_name=self.settings.qdrant_collection,

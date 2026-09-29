@@ -59,6 +59,47 @@ CANNED_ANSWERS: dict[str, str] = {
 }
 
 
+# Respostas "de LLM sem contexto" para o exercício Com e sem RAG no modo
+# mock: soam plausíveis, mas contradizem os documentos da base — é
+# exatamente o que o aluno deve aprender a desconfiar.
+NO_CONTEXT_ANSWERS: dict[str, str] = {
+    "como faco meu tcc": (
+        "Em geral, o TCC começa escolhendo um tema e um orientador. Você escreve o trabalho "
+        "ao longo do último ano e entrega uma monografia de cerca de 30 páginas, apresentada "
+        "a uma banca no fim do curso."
+    ),
+    "quantas faltas posso ter": (
+        "Na maioria das instituições você pode faltar até 30% das aulas de cada disciplina "
+        "sem ser reprovado por frequência."
+    ),
+    "como funciona o estagio": (
+        "O estágio costuma poder ser iniciado a qualquer momento do curso, desde que a empresa "
+        "assine um termo. Normalmente não há relatórios obrigatórios até o fim."
+    ),
+    "como faco minha matricula": (
+        "A matrícula costuma ser feita presencialmente na secretaria no primeiro dia de aula, "
+        "levando documento de identidade e comprovante de residência."
+    ),
+    "como posso conseguir uma bolsa": (
+        "Você pode pedir uma bolsa a qualquer momento do ano na reitoria, e normalmente basta "
+        "ter boas notas para ser aprovado."
+    ),
+    "como funciona a biblioteca": (
+        "A biblioteca costuma abrir de segunda a sexta, em horário comercial, e permite "
+        "emprestar até 3 livros por 7 dias."
+    ),
+    "quando posso fazer uma prova substitutiva": (
+        "Geralmente a prova substitutiva é aplicada na última semana do semestre e substitui "
+        "a menor nota, independentemente do motivo da falta."
+    ),
+}
+
+GENERIC_NO_CONTEXT_ANSWER = (
+    "Em geral, esse tipo de procedimento varia de instituição para instituição. O mais comum "
+    "é procurar a secretaria acadêmica e apresentar a documentação exigida."
+)
+
+
 def _normalize(q: str) -> str:
     q = q.lower().strip().rstrip("?!.")
     q = "".join(c for c in unicodedata.normalize("NFD", q) if unicodedata.category(c) != "Mn")
@@ -77,6 +118,42 @@ class LLMService:
         if self.settings.llm_provider == "openai":
             return self._openai_generate(question, context)
         raise ValueError(f"Provedor de LLM desconhecido: {self.settings.llm_provider}")
+
+    def generate_without_context(self, question: str) -> str:
+        """A LLM respondendo sozinha, sem nenhum documento recuperado —
+        contraponto ao `generate` no exercício Com e sem RAG."""
+        if self.settings.llm_provider == "mock":
+            return NO_CONTEXT_ANSWERS.get(_normalize(question), GENERIC_NO_CONTEXT_ANSWER)
+        if self.settings.llm_provider not in {"groq", "openai"}:
+            raise ValueError(f"Provedor de LLM desconhecido: {self.settings.llm_provider}")
+        if not self.settings.llm_api_key:
+            raise RuntimeError(f"LLM_API_KEY não configurada para o provedor '{self.settings.llm_provider}'.")
+        import httpx
+
+        if self.settings.llm_provider == "groq":
+            url = "https://api.groq.com/openai/v1/chat/completions"
+            model = self.settings.llm_model or "llama-3.1-8b-instant"
+        else:
+            url = "https://api.openai.com/v1/chat/completions"
+            model = self.settings.llm_model or "gpt-4o-mini"
+        resp = httpx.post(
+            url,
+            headers={"Authorization": f"Bearer {self.settings.llm_api_key}"},
+            json={
+                "model": model,
+                "messages": [
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {
+                        "role": "user",
+                        "content": f"{question}\n\nResponda de forma direta, em até 3 frases.",
+                    },
+                ],
+                "max_tokens": 400,
+            },
+            timeout=30,
+        )
+        resp.raise_for_status()
+        return resp.json()["choices"][0]["message"]["content"]
 
     def _mock_generate(self, question: str, context: list[ContextChunk]) -> str:
         canned = CANNED_ANSWERS.get(_normalize(question))

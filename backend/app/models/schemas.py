@@ -64,6 +64,24 @@ class QueryResponse(BaseModel):
     used_mock: bool
 
 
+class SearchCompareResponse(BaseModel):
+    """Mesma pergunta em duas buscas: por significado (vetorial) e por
+    palavra-chave exata. `semantic_available` é False quando o backend não
+    tem Qdrant + embeddings reais — nesse caso a lista `semantic` não tem
+    valor didático e o frontend deve avisar o aluno."""
+
+    question: str
+    semantic: list[RetrievalItem]
+    keyword: list[RetrievalItem]
+    semantic_available: bool
+
+
+class NoContextResponse(BaseModel):
+    question: str
+    answer: str
+    used_mock: bool
+
+
 class DocumentOut(BaseModel):
     id: str
     filename: str

@@ -177,6 +177,29 @@ function normalizeQuestion(q: string): string {
     .trim();
 }
 
+/** Busca lexical pura (palavras exatas, sem radical nem ruído). Espelha
+ * `VectorStore.keyword_search` do backend. Documentos sem nenhuma palavra em
+ * comum com a pergunta não aparecem. */
+export function mockKeywordSearch(question: string, topK: number = TOP_K): RetrievalItem[] {
+  const qTokens = new Set(tokenize(question));
+  if (qTokens.size === 0) return [];
+  return documents
+    .map((doc) => {
+      const docTokens = new Set(tokenize(doc.title + ' ' + doc.content + ' ' + doc.tags.join(' ')));
+      const hits = [...qTokens].filter((t) => docTokens.has(t)).length;
+      return { doc, hits };
+    })
+    .filter(({ hits }) => hits > 0)
+    .map(({ doc, hits }) => ({
+      documentId: doc.id,
+      filename: doc.filename,
+      title: doc.title,
+      similarity: Number((hits / qTokens.size).toFixed(2)),
+    }))
+    .sort((a, b) => b.similarity - a.similarity || a.filename.localeCompare(b.filename))
+    .slice(0, topK);
+}
+
 function generateAnswer(question: string, context: ContextChunk[]): string {
   const canned = CANNED_ANSWERS[normalizeQuestion(question)];
   if (canned) return canned;

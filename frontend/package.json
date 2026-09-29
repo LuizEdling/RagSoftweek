@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "validate:practice": "tsc scripts/validate-practice.ts --outDir node_modules/.cache/validate-practice --rootDir . --module commonjs --moduleResolution node --target es2022 --skipLibCheck --types node --ignoreConfig --ignoreDeprecations 6.0 && echo '{\"type\":\"commonjs\"}' > node_modules/.cache/validate-practice/package.json && node node_modules/.cache/validate-practice/scripts/validate-practice.js"
   },
   "dependencies": {
     "framer-motion": "^13.4.4",
