@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { Brain } from 'lucide-react';
 
 const navItems = [
-  { to: '/', label: 'Laboratóriosss' },
+  { to: '/', label: 'Laboratório' },
   { to: '/pratica', label: 'Modo Prática' },
   { to: '/como-funciona', label: 'Como funciona' },
   { to: '/base-de-conhecimento', label: 'Base de Conhecimento' },
