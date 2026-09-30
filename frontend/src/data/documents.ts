@@ -75,7 +75,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['notas', 'média', 'aprovação'],
     content:
-      'A aprovação em uma disciplina exige média final igual ou superior a 7,0, calculada pela média aritmética simples das avaliações do semestre. Alunos com média entre 4,0 e 6,9 têm direito a exame final, cuja nota é somada à média parcial em proporção definida no regimento acadêmico. Notas ficam disponíveis no Portal do Aluno em até 5 dias úteis após o lançamento pelo professor, e podem ser contestadas via recurso de revisão em até 3 dias após a divulgação.',
+      'A aprovação em uma disciplina exige média final igual ou superior a 7,0, calculada pela média aritmética simples das avaliações do semestre. Alunos com média entre 4,0 e 6,9 têm direito a exame final, cuja nota é somada à média parcial em proporção definida no regimento acadêmico. Notas ficam disponíveis no Portal do Aluno em até 5 dias úteis após o lançamento pelo professor, e podem ser contestadas via recurso de revisão em até 3 dias após a divulgação. Alunos reprovados por nota, mas com frequência regular, podem solicitar segunda chamada do exame final em caso de impedimento justificado, seguindo o mesmo prazo de 5 dias úteis usado para revisão de notas.',
   },
   {
     id: '009',
@@ -84,7 +84,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['disciplinas', 'ementa', 'grade curricular'],
     content:
-      'As ementas de todas as disciplinas estão disponíveis no Portal Acadêmico, organizadas por curso e período. Cada ementa descreve objetivos, conteúdo programático, bibliografia básica e complementar. Alunos podem cursar disciplinas eletivas de outros cursos, respeitando o limite de créditos do semestre e a disponibilidade de vagas, mediante inscrição no período de ajuste de matrícula.',
+      'As ementas de todas as disciplinas estão disponíveis no Portal Acadêmico, organizadas por curso e período. Cada ementa descreve objetivos, conteúdo programático, bibliografia básica e complementar. Alunos podem cursar disciplinas eletivas de outros cursos, respeitando o limite de créditos do semestre e a disponibilidade de vagas, mediante inscrição no período de ajuste de matrícula. O período de ajuste, usado para trocar disciplinas eletivas, ocorre na primeira semana letiva e não deve ser confundido com o prazo regular de matrícula do semestre. A bibliografia complementar de cada ementa costuma incluir títulos disponíveis apenas no acervo digital, sem exemplares físicos na Biblioteca Central.',
   },
   {
     id: '010',
@@ -93,7 +93,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['calendário', 'datas', 'semestre'],
     content:
-      'O calendário acadêmico do Horizonte Azul é publicado anualmente e contempla datas de matrícula, início e fim das aulas, períodos de avaliação, feriados institucionais e prazos de solicitações administrativas. O ano letivo é dividido em dois semestres regulares, com possibilidade de módulos de férias no recesso de julho para disciplinas de dependência.',
+      'O calendário acadêmico do Horizonte Azul é publicado anualmente e contempla datas de matrícula, início e fim das aulas, períodos de avaliação, feriados institucionais e prazos de solicitações administrativas. O ano letivo é dividido em dois semestres regulares, com possibilidade de módulos de férias no recesso de julho para disciplinas de dependência. As datas de matrícula de calouros e veteranos, incluindo períodos de ajuste e matrícula extemporânea, são publicadas com pelo menos 30 dias de antecedência no site institucional. Períodos de avaliação regular e de provas substitutivas aparecem no calendário apenas como janelas gerais, sem detalhar prazos individuais de solicitação, que ficam a cargo do regimento de cada processo.',
   },
   {
     id: '011',
@@ -111,7 +111,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['trabalhos', 'projetos', 'extensão'],
     content:
-      'Trabalhos acadêmicos em grupo e projetos de extensão fazem parte da matriz curricular de diversos cursos, com o objetivo de aplicar conhecimento teórico em problemas reais da comunidade. Os projetos de extensão são cadastrados junto à Pró-Reitoria de Extensão e podem gerar horas de atividades complementares. A entrega segue normas de formatação semelhantes às do TCC, mas com escopo e prazo reduzidos, definidos pelo professor da disciplina.',
+      'Trabalhos acadêmicos em grupo e projetos de extensão fazem parte da matriz curricular de diversos cursos, com o objetivo de aplicar conhecimento teórico em problemas reais da comunidade. Os projetos de extensão são cadastrados junto à Pró-Reitoria de Extensão e podem gerar horas de atividades complementares. A entrega segue normas de formatação semelhantes às do TCC, mas com escopo e prazo reduzidos, definidos pelo professor da disciplina. Alunos podem reaproveitar parte da pesquisa bibliográfica de um projeto de extensão no pré-projeto do TCC, desde que citada a autoria original e ampliada a revisão teórica. A avaliação de trabalhos de extensão, quando houver banca, é definida pelo próprio professor da disciplina e não segue o mesmo rito das bancas de qualificação e defesa do TCC.',
   },
   {
     id: '013',
@@ -120,7 +120,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['monitoria', 'bolsa monitoria', 'seleção'],
     content:
-      'O Programa de Monitoria seleciona alunos com bom desempenho acadêmico para auxiliar professores em disciplinas nas quais já foram aprovados com média igual ou superior a 8,0. A seleção ocorre por edital semestral, com prova escrita e entrevista. Monitores recebem bolsa de auxílio e certificado, além de horas válidas como atividade complementar.',
+      'O Programa de Monitoria seleciona alunos com bom desempenho acadêmico para auxiliar professores em disciplinas nas quais já foram aprovados com média igual ou superior a 8,0. A seleção ocorre por edital semestral, com prova escrita e entrevista. Monitores recebem bolsa de auxílio e certificado, além de horas válidas como atividade complementar. O valor da bolsa de monitoria é fixo, definido em edital, e não pode ser acumulado com bolsa de mérito acadêmico, embora possa ser somado à bolsa socioeconômica mediante análise do setor de Assistência Estudantil. Em alguns cursos, a monitoria pode incluir apoio no balcão da Biblioteca Central em horários de pico, mas essa atividade não substitui as funções administrativas dos bibliotecários.',
   },
   {
     id: '014',
@@ -138,7 +138,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['atividades complementares', 'horas', 'certificado'],
     content:
-      'Todos os cursos exigem uma carga horária mínima de atividades complementares para a colação de grau, que pode ser cumprida com participação em eventos, monitorias, iniciação científica, cursos de extensão e trabalho voluntário. Os certificados devem ser cadastrados no Portal do Aluno na aba de Atividades Complementares, e são validados pela coordenação do curso ao final de cada semestre.',
+      'Todos os cursos exigem uma carga horária mínima de atividades complementares para a colação de grau, que pode ser cumprida com participação em eventos, monitorias, iniciação científica, cursos de extensão e trabalho voluntário. Os certificados devem ser cadastrados no Portal do Aluno na aba de Atividades Complementares, e são validados pela coordenação do curso ao final de cada semestre. A participação como ouvinte em bancas de qualificação ou defesa de colegas também conta como hora complementar, mediante lista de presença assinada pelo orientador responsável. Estágios que ultrapassarem a carga mínima exigida pelo curso geram horas complementares proporcionais ao excedente, desde que comprovadas junto à coordenação.',
   },
   {
     id: '016',
@@ -147,7 +147,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'infraestrutura',
     tags: ['laboratório', 'reserva', 'equipamentos'],
     content:
-      'Os laboratórios de informática, eletrônica e ciências funcionam mediante agendamento prévio pelo Portal do Aluno, com prioridade para aulas regulares. Fora do horário de aula, alunos podem reservar bancadas e equipamentos específicos, como osciloscópios e kits de robótica, por até 3 horas diárias, respeitando a disponibilidade e as normas de uso do laboratório.',
+      'Os laboratórios de informática, eletrônica e ciências funcionam mediante agendamento prévio pelo Portal do Aluno, com prioridade para aulas regulares. Fora do horário de aula, alunos podem reservar bancadas e equipamentos específicos, como osciloscópios e kits de robótica, por até 3 horas diárias, respeitando a disponibilidade e as normas de uso do laboratório. A reserva de equipamentos segue lista de espera única para todos os laboratórios, gerenciada pelo mesmo sistema usado para reserva de salas de estudo da Biblioteca Central. Alunos de iniciação científica têm prioridade de uso fora do horário de aula, mediante comprovação do vínculo com um projeto de pesquisa ativo.',
   },
   {
     id: '017',
@@ -156,7 +156,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['transferência', 'trancamento', 'cancelamento'],
     content:
-      'O trancamento de matrícula pode ser solicitado a qualquer momento do semestre pelo Portal do Aluno, preservando a vaga do estudante por até 4 semestres consecutivos. Transferências externas, tanto de saída quanto de entrada, exigem análise de histórico escolar e aproveitamento de disciplinas cursadas, realizada pela coordenação do curso em até 15 dias úteis após o protocolo do pedido.',
+      'O trancamento de matrícula pode ser solicitado a qualquer momento do semestre pelo Portal do Aluno, preservando a vaga do estudante por até 4 semestres consecutivos. Transferências externas, tanto de saída quanto de entrada, exigem análise de histórico escolar e aproveitamento de disciplinas cursadas, realizada pela coordenação do curso em até 15 dias úteis após o protocolo do pedido. O pedido de trancamento não exige justificativa formal, mas impede a participação em atividades acadêmicas do curso, incluindo provas, durante o período de afastamento. Alunos que não solicitarem a renovação da matrícula até o prazo do semestre seguinte ao trancamento perdem automaticamente a vaga reservada, sendo necessário novo processo seletivo para retornar ao curso.',
   },
   {
     id: '018',
