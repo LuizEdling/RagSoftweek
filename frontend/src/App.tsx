@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Laboratorio from './pages/Laboratorio';
 import Pratica from './pages/Pratica';
@@ -8,7 +8,7 @@ import Sobre from './pages/Sobre';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<Laboratorio />} />
@@ -18,6 +18,6 @@ export default function App() {
           <Route path="/sobre" element={<Sobre />} />
         </Routes>
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
