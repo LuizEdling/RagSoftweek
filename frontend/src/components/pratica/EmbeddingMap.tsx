@@ -35,6 +35,7 @@ export default function EmbeddingMap({
   distances = {},
   onSelect,
   onPlace,
+  hideDocLabels = false,
 }: {
   /** Ponto da pergunta (do aluno, ou o "real" quando fixo). */
   pin?: XY | null;
@@ -49,6 +50,10 @@ export default function EmbeddingMap({
   distances?: Record<string, number>;
   onSelect?: (file: string) => void;
   onPlace?: (x: number, y: number) => void;
+  /** Esconde o nome de cada documento (mantém só as regiões por assunto) —
+   * usado enquanto o aluno ainda está adivinhando, para que a missão exija
+   * pensar em significado em vez de ler o rótulo que bate com a pergunta. */
+  hideDocLabels?: boolean;
 }) {
   function handlePlace(e: React.MouseEvent<SVGSVGElement>) {
     if (!onPlace) return;
@@ -197,16 +202,18 @@ export default function EmbeddingMap({
               />
             )}
             <circle cx={p.x} cy={p.y} r={1.9} fill={cluster.color} />
-            <text
-              x={p.x}
-              y={p.y + 5.6}
-              textAnchor="middle"
-              fontSize={2.5}
-              fill="#cbd5e1"
-              style={{ pointerEvents: 'none' }}
-            >
-              {p.label}
-            </text>
+            {!hideDocLabels && (
+              <text
+                x={p.x}
+                y={p.y + 5.6}
+                textAnchor="middle"
+                fontSize={2.5}
+                fill="#cbd5e1"
+                style={{ pointerEvents: 'none' }}
+              >
+                {p.label}
+              </text>
+            )}
             {d !== undefined && (
               <text
                 x={p.x}

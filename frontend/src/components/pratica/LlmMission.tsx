@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { EyeOff, Eye } from 'lucide-react';
 import ScoreBanner from './ScoreBanner';
 import { CodeReveal, DoneNote, MissionCard, PromptBox } from './MissionParts';
+import { Badge } from '../ui';
 import type { MissionProps } from './MissionParts';
 import { getDocumentByFilename } from '../../data/documents';
 import { scenarioFor } from '../../data/practiceScenarios';
@@ -63,8 +65,29 @@ export default function LlmMission({ question, alreadyDone, onComplete }: Missio
       />
       <DoneNote show={alreadyDone && stage === 'blind'} />
 
+      {!done && (
+        <div className="flex items-center gap-2">
+          <Badge tone={stage === 'blind' ? 'warning' : 'blue'}>
+            {stage === 'blind' ? 'Etapa 1 de 2' : 'Etapa 2 de 2'}
+          </Badge>
+          <span className="flex items-center gap-1.5 text-sm text-slate-400">
+            {stage === 'blind' ? (
+              <>
+                <EyeOff className="h-3.5 w-3.5" /> Respondendo sem contexto — depois você responde de
+                novo, já com o contexto.
+              </>
+            ) : (
+              <>
+                <Eye className="h-3.5 w-3.5" /> Agora com o contexto na mão — responda de novo, pode
+                mudar de ideia.
+              </>
+            )}
+          </span>
+        </div>
+      )}
+
       <div className="grid gap-4 lg:grid-cols-2">
-        <PromptBox title={hasContext ? 'Prompt 2 — com contexto' : 'Prompt 1 — sem contexto'}>
+        <PromptBox title={hasContext ? 'Prompt 2 de 2 — com contexto' : 'Prompt 1 de 2 — sem contexto'}>
           {`CONTEXTO:\n${hasContext ? contextText : '(vazio)'}\n\nPERGUNTA:\n${question}`}
         </PromptBox>
 

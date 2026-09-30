@@ -12,7 +12,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['matrícula', 'renovação', 'calouros'],
     content:
-      'A matrícula no Horizonte Azul é feita a cada semestre pelo Portal do Aluno, entre os dias 10 e 20 do mês anterior ao início das aulas. Calouros realizam a matrícula presencialmente na Central de Atendimento, mediante apresentação de RG, CPF e histórico escolar. Alunos veteranos renovam automaticamente a matrícula se não houver pendências financeiras ou acadêmicas. Em caso de esquecimento do prazo, é possível solicitar matrícula extemporânea mediante justificativa e pagamento de taxa administrativa.',
+      'A matrícula no Horizonte Azul é feita a cada semestre pelo Portal do Aluno, entre os dias 10 e 20 do mês anterior ao início das aulas. Calouros realizam a matrícula presencialmente na Central de Atendimento, mediante apresentação de RG, CPF e histórico escolar do ensino médio ou de instituição anterior. Alunos veteranos renovam automaticamente a matrícula se não houver pendências financeiras ou acadêmicas registradas até o dia 5 do mês da matrícula. Veteranos com pendência financeira podem regularizar o débito até o último dia do prazo de matrícula sem perder a renovação automática, desde que quitado em parcela única. Em caso de esquecimento do prazo, é possível solicitar matrícula extemporânea mediante justificativa e pagamento de taxa administrativa, em até 10 dias corridos após o encerramento do prazo regular. Alunos com pendência acadêmica, como disciplinas em dependência, devem procurar a coordenação antes da matrícula para ajuste do plano de estudos do semestre.',
   },
   {
     id: '002',
@@ -21,7 +21,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['tcc', 'monografia', 'orientador'],
     content:
-      'O Trabalho de Conclusão de Curso deve ser iniciado mediante a definição de um orientador e a aprovação do tema junto à coordenação do curso, no início do penúltimo semestre. O aluno deve entregar um pré-projeto até a sexta semana letiva, participar de duas bancas de acompanhamento (qualificação e defesa final) e formatar o documento de acordo com as normas da ABNT disponíveis no Portal Acadêmico. A escolha do orientador deve respeitar a área de pesquisa do docente, listada no catálogo de linhas de pesquisa.',
+      'O Trabalho de Conclusão de Curso deve ser iniciado mediante a definição de um orientador e a aprovação do tema junto à coordenação do curso, no início do penúltimo semestre. O aluno deve entregar um pré-projeto até a sexta semana letiva, participar de duas bancas de acompanhamento (qualificação e defesa final) e formatar o documento de acordo com as normas da ABNT disponíveis no Portal Acadêmico. A escolha do orientador deve respeitar a área de pesquisa do docente, listada no catálogo de linhas de pesquisa, e só pode ser trocada uma vez, mediante justificativa por escrito às duas partes. Quem perder o prazo do pré-projeto pode pedir uma única prorrogação de até duas semanas à coordenação, mas fica de fora da janela de qualificação antecipada do calendário regular. A nota mínima para aprovação na defesa final é 6,0, calculada pela média dos dois membros da banca examinadora, sem contar o voto do orientador. Trabalhos reprovados na defesa podem ser reapresentados uma única vez, no semestre seguinte, sem repetir a etapa de qualificação.',
   },
   {
     id: '003',
@@ -30,7 +30,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'infraestrutura',
     tags: ['biblioteca', 'empréstimo', 'acervo'],
     content:
-      'A Biblioteca Central funciona de segunda a sábado, das 7h às 22h, e permite o empréstimo de até 5 livros por até 14 dias, renováveis pelo Portal do Aluno caso não haja reservas pendentes. O acervo digital reúne mais de 40 mil títulos acessíveis remotamente com login institucional. Atrasos na devolução geram bloqueio temporário de novos empréstimos, calculado em um dia de bloqueio para cada dia de atraso.',
+      'A Biblioteca Central funciona de segunda a sábado, das 7h às 22h, e permite o empréstimo de até 5 livros por até 14 dias, renováveis pelo Portal do Aluno caso não haja reservas pendentes. O acervo digital reúne mais de 40 mil títulos acessíveis remotamente com login institucional, sem limite de empréstimos simultâneos para esse formato. Atrasos na devolução geram bloqueio temporário de novos empréstimos, calculado em um dia de bloqueio para cada dia de atraso, por livro. Livros com reserva feita por outro aluno não podem ser renovados e devem ser devolvidos na data original, mesmo sem uso do limite de 14 dias. Alunos de pós-graduação e docentes têm limite estendido de 10 livros por até 21 dias, mediante cadastro específico junto ao balcão de atendimento. Materiais de acervo raro ou de referência, como dicionários, enciclopédias e normas técnicas, são de consulta local e não podem ser retirados em nenhuma hipótese.',
   },
   {
     id: '004',
@@ -39,7 +39,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['provas', 'avaliação', 'substitutiva'],
     content:
-      'Cada disciplina possui ao menos duas avaliações regulares por semestre, cujas datas são divulgadas no plano de ensino nas primeiras duas semanas de aula. O aluno que faltar a uma avaliação por motivo justificado (atestado médico, óbito familiar ou convocação legal) pode solicitar prova substitutiva em até 5 dias úteis após a data original, mediante protocolo na Central de Atendimento. A prova substitutiva é única e abrange todo o conteúdo do semestre até a data da aplicação.',
+      'Cada disciplina possui ao menos duas avaliações regulares por semestre, cujas datas são divulgadas no plano de ensino nas primeiras duas semanas de aula. O aluno que faltar a uma avaliação por motivo justificado (atestado médico, óbito familiar ou convocação legal) pode solicitar prova substitutiva em até 5 dias úteis após a data original, mediante protocolo na Central de Atendimento. A prova substitutiva é única e abrange todo o conteúdo do semestre até a data da aplicação, podendo ser mais abrangente do que a avaliação original perdida. Faltas por motivos não previstos na lista oficial, como viagem, problemas de transporte ou compromissos pessoais, não dão direito à substitutiva, apenas a eventual abono de frequência quando aplicável. Caso o aluno perca mais de uma avaliação no mesmo semestre por motivos justificados, a mesma prova substitutiva cobre todas as datas perdidas, sem necessidade de solicitações separadas. O resultado da substitutiva substitui diretamente a nota da avaliação original perdida, sem possibilidade de manter a menor das duas notas.',
   },
   {
     id: '005',
@@ -48,7 +48,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'acadêmico',
     tags: ['faltas', 'frequência', 'reprovação'],
     content:
-      'A frequência mínima exigida para aprovação em qualquer disciplina do Horizonte Azul é de 75% das aulas ministradas no semestre. Isso significa que, em uma disciplina com carga horária de 80 horas, o aluno pode ter no máximo 20 horas de faltas, justificadas ou não. Alunos que ultrapassarem esse limite são automaticamente reprovados por frequência, independentemente das notas obtidas, e devem cursar a disciplina novamente.',
+      'A frequência mínima exigida para aprovação em qualquer disciplina do Horizonte Azul é de 75% das aulas ministradas no semestre. Isso significa que, em uma disciplina com carga horária de 80 horas, o aluno pode ter no máximo 20 horas de faltas, justificadas ou não. Faltas em dias de avaliação podem ser abonadas mediante atestado médico entregue em até 5 dias úteis, mas mesmo abonadas elas continuam contando para o limite de frequência. Disciplinas com carga horária diferente de 80 horas seguem a mesma proporção de 25% de faltas permitidas, arredondada para baixo em número de horas. Alunos que ultrapassarem o limite são automaticamente reprovados por frequência, independentemente das notas obtidas, e devem cursar a disciplina novamente em oferta futura. Não há possibilidade de compensar faltas excedentes com trabalhos extras ou frequência superior em outra disciplina do mesmo semestre.',
   },
   {
     id: '006',
@@ -57,7 +57,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'estágio',
     tags: ['estágio', 'estágio obrigatório', 'convênio'],
     content:
-      'O estágio obrigatório pode ser iniciado a partir do 5º período, em empresas conveniadas ou mediante convênio individual firmado com o setor de Relações Empresariais. É necessário indicar um professor orientador de estágio, entregar relatórios parciais bimestrais e um relatório final ao término da carga horária mínima exigida pela matriz curricular do curso. O contrato de estágio deve ser assinado antes do início das atividades, sob pena de as horas não serem validadas.',
+      'O estágio obrigatório pode ser iniciado a partir do 5º período, em empresas conveniadas ou mediante convênio individual firmado com o setor de Relações Empresariais. É necessário indicar um professor orientador de estágio, entregar relatórios parciais bimestrais e um relatório final ao término da carga horária mínima exigida pela matriz curricular do curso. O contrato de estágio deve ser assinado antes do início das atividades, sob pena de as horas não serem validadas retroativamente. Estágios não obrigatórios, embora não contem para a carga horária mínima, seguem as mesmas regras de contrato e orientação e podem ser convertidos em horas de atividades complementares, até o limite de 60 horas. Caso o aluno mude de local de estágio, é necessário aviso prévio ao orientador e assinatura de um novo contrato, sem reiniciar a contagem de horas já cumpridas. O não cumprimento do relatório bimestral por dois períodos consecutivos cancela automaticamente o convênio vigente, exigindo nova solicitação.',
   },
   {
     id: '007',
@@ -66,7 +66,7 @@ export const documents: KnowledgeDocument[] = [
     category: 'financeiro',
     tags: ['bolsa', 'financiamento', 'desconto'],
     content:
-      'O Horizonte Azul oferece bolsas de mérito acadêmico (para os melhores coeficientes de rendimento de cada curso), bolsas socioeconômicas mediante análise de renda familiar, e bolsas de iniciação científica vinculadas a projetos de pesquisa com professores orientadores. As inscrições para bolsas socioeconômicas abrem no início de cada semestre no setor de Assistência Estudantil, e exigem comprovação de renda e documentação do grupo familiar. Também há parceria com programas de financiamento estudantil externo.',
+      'O Horizonte Azul oferece bolsas de mérito acadêmico (para os melhores coeficientes de rendimento de cada curso), bolsas socioeconômicas mediante análise de renda familiar, e bolsas de iniciação científica vinculadas a projetos de pesquisa com professores orientadores. As inscrições para bolsas socioeconômicas abrem no início de cada semestre no setor de Assistência Estudantil, e exigem comprovação de renda per capita de até 1,5 salário mínimo e documentação do grupo familiar. A bolsa de mérito é renovada automaticamente enquanto o aluno mantiver coeficiente de rendimento entre os três melhores do curso, sem necessidade de nova inscrição. Bolsas de iniciação científica dependem de aprovação prévia de um projeto pelo Comitê de Pesquisa e têm duração vinculada ao cronograma do projeto, podendo ser renovadas anualmente. É permitido acumular bolsa socioeconômica com bolsa de iniciação científica, mas não é permitido acumular duas bolsas socioeconômicas de fontes diferentes, institucional e externa. Também há parceria com programas de financiamento estudantil externo, que não são administrados pela Assistência Estudantil e possuem regras e prazos próprios do agente financeiro.',
   },
   {
     id: '008',

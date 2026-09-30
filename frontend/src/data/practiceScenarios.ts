@@ -75,8 +75,11 @@ export function nearest(pin: { x: number; y: number }, k: number): (MapPoint & {
 
 /** Quantos documentos a busca vetorial devolve nas missões (o "K"). */
 export const SEARCH_K = 4;
-/** Raio (em unidades do mapa) em que o aluno acerta a posição da pergunta. */
-export const EMBED_HIT_RADIUS = 16;
+/** Raio (em unidades do mapa) em que o aluno acerta a posição da pergunta.
+ * Antes era 16 — largo o bastante pra acertar qualquer ponto do cluster
+ * certo sem pensar na posição real. Reduzido para exigir uma estimativa
+ * mais próxima do ponto verdadeiro, não só da região geral. */
+export const EMBED_HIT_RADIUS = 9;
 
 /** answers = responde a pergunta; helps = complementa; noise = só parece parecido. */
 export type Verdict = 'answers' | 'helps' | 'noise';
@@ -126,7 +129,10 @@ export const SCENARIOS: Scenario[] = [
     contextWhy: [
       'Essencial: diz como o TCC começa (orientador e aprovação do tema).',
       'Essencial: traz prazo do pré-projeto, as duas bancas e a formatação.',
-      'Pode ficar de fora: detalhe sobre como escolher o orientador, não muda o passo a passo.',
+      'Pode ficar de fora: regra de troca de orientador, só importa pra quem já começou.',
+      'Pode ficar de fora: só interessa a quem já perdeu o prazo do pré-projeto.',
+      'Pode ficar de fora: critério de nota da defesa, não faz parte de como começar.',
+      'Pode ficar de fora: fala de reprovação, um cenário que ainda não aconteceu pra quem está perguntando como começar.',
     ],
     llmOptions: [
       {
@@ -143,8 +149,8 @@ export const SCENARIOS: Scenario[] = [
       },
     ],
     invented: {
-      text: 'A banca de defesa final é composta obrigatoriamente por três professores externos à instituição.',
-      why: 'Os documentos falam de duas bancas (qualificação e defesa final), mas nada sobre três professores externos.',
+      text: 'Quem perde o prazo do pré-projeto pode pedir quantas prorrogações forem necessárias, sem limite de tentativas.',
+      why: 'A fonte permite só uma prorrogação, de até duas semanas — não é ilimitada.',
     },
   },
   {
@@ -161,7 +167,10 @@ export const SCENARIOS: Scenario[] = [
     contextWhy: [
       'Essencial: define a frequência mínima (75%) para aprovação.',
       'Essencial: converte a regra em horas — o número que o aluno quer saber.',
+      'Pode ficar de fora: fala de abono por atestado, mas não muda o limite — a pergunta é sobre o número.',
+      'Pode ficar de fora: só relevante pra quem tem disciplina com carga horária diferente de 80h.',
       'Pode ficar de fora: a consequência (reprovação) é útil, mas não responde "quantas faltas".',
+      'Pode ficar de fora: fala de compensação entre disciplinas, um detalhe à parte.',
     ],
     llmOptions: [
       {
@@ -178,8 +187,8 @@ export const SCENARIOS: Scenario[] = [
       },
     ],
     invented: {
-      text: 'Faltas justificadas por atestado médico não entram na contagem do limite.',
-      why: 'A fonte diz o contrário: o limite vale para faltas justificadas ou não.',
+      text: 'Faltas justificadas por atestado médico não entram na contagem do limite de frequência.',
+      why: 'A fonte diz o contrário: mesmo abonada por atestado, a falta continua contando para o limite de frequência.',
     },
   },
   {
@@ -197,6 +206,9 @@ export const SCENARIOS: Scenario[] = [
       'Essencial: diz quando o estágio pode começar e com quem.',
       'Essencial: lista o orientador e os relatórios obrigatórios.',
       'Pode ficar de fora aqui: o contrato é importante, mas a pergunta é "como funciona", e as outras frases já dão o quadro geral.',
+      'Pode ficar de fora: trata do estágio NÃO obrigatório, outro caso à parte.',
+      'Pode ficar de fora: só relevante pra quem troca de empresa no meio do estágio.',
+      'Pode ficar de fora: fala de cancelamento do convênio, uma consequência, não o funcionamento básico.',
     ],
     llmOptions: [
       {
@@ -213,8 +225,8 @@ export const SCENARIOS: Scenario[] = [
       },
     ],
     invented: {
-      text: 'O estágio remunerado dispensa a entrega do relatório final.',
-      why: 'A fonte exige o relatório final ao término da carga horária, sem exceção para estágio remunerado.',
+      text: 'Estágios não obrigatórios não precisam de contrato assinado, já que não contam para a carga horária mínima.',
+      why: 'A fonte diz o contrário: estágios não obrigatórios seguem as mesmas regras de contrato e orientação dos obrigatórios.',
     },
   },
   {
@@ -232,7 +244,9 @@ export const SCENARIOS: Scenario[] = [
       'Essencial: diz onde e quando se faz a matrícula (Portal do Aluno, dias 10 a 20).',
       'Essencial: explica o caso dos calouros e os documentos exigidos.',
       'Pode ficar de fora: a renovação automática dos veteranos é útil, mas a pergunta mais comum é a do calouro.',
+      'Pode ficar de fora: só relevante pra veterano com pendência financeira.',
       'Pode ficar de fora: matrícula extemporânea é um caso à parte.',
+      'Pode ficar de fora: trata de pendência acadêmica, outro caso específico.',
     ],
     llmOptions: [
       {
@@ -249,8 +263,8 @@ export const SCENARIOS: Scenario[] = [
       },
     ],
     invented: {
-      text: 'Quem perder o prazo perde a vaga automaticamente.',
-      why: 'A fonte prevê matrícula extemporânea, com justificativa e taxa administrativa; a vaga não é perdida automaticamente.',
+      text: 'Veteranos com pendência financeira perdem automaticamente a vaga, mesmo se quitarem o débito antes do fim do prazo de matrícula.',
+      why: 'A fonte permite regularizar a pendência financeira até o fim do prazo sem perder a renovação automática, desde que paga em parcela única.',
     },
   },
   {
@@ -267,6 +281,9 @@ export const SCENARIOS: Scenario[] = [
     contextWhy: [
       'Essencial: apresenta os três tipos de bolsa.',
       'Essencial: diz quando e onde se inscrever e o que comprovar.',
+      'Pode ficar de fora: fala da renovação da bolsa de mérito, não de como conseguir uma pela primeira vez.',
+      'Pode ficar de fora: detalha só a de iniciação científica.',
+      'Pode ficar de fora: regra de acúmulo, só importa depois de já ter uma bolsa.',
       'Pode ficar de fora: financiamento externo é um caminho à parte.',
     ],
     llmOptions: [
@@ -284,8 +301,8 @@ export const SCENARIOS: Scenario[] = [
       },
     ],
     invented: {
-      text: 'A bolsa de mérito cobre 100% da mensalidade.',
-      why: 'Nenhum documento informa o percentual coberto pelas bolsas.',
+      text: 'É possível acumular duas bolsas socioeconômicas, uma institucional e uma externa, desde que a renda familiar comprove necessidade.',
+      why: 'A fonte proíbe acumular duas bolsas socioeconômicas de fontes diferentes, institucional e externa.',
     },
   },
   {
@@ -303,6 +320,9 @@ export const SCENARIOS: Scenario[] = [
       'Essencial: horário de funcionamento e regras de empréstimo.',
       'Pode ficar de fora: o acervo digital é um extra; a pergunta é sobre o funcionamento.',
       'Essencial: a regra de atrasos e bloqueio é a que mais gera dúvida.',
+      'Pode ficar de fora: só se aplica a quem pegou livro já reservado por outro aluno.',
+      'Pode ficar de fora: regra específica para pós-graduação e docentes, não pra maioria.',
+      'Pode ficar de fora: trata de acervo raro e consulta local, um caso específico.',
     ],
     llmOptions: [
       {
@@ -319,8 +339,8 @@ export const SCENARIOS: Scenario[] = [
       },
     ],
     invented: {
-      text: 'Aos domingos a biblioteca abre das 9h às 13h.',
-      why: 'A fonte diz que ela funciona de segunda a sábado; não há funcionamento aos domingos.',
+      text: 'Mesmo com reserva de outro aluno, é possível renovar o empréstimo uma última vez pelo Portal do Aluno.',
+      why: 'A fonte proíbe renovar um livro que já tem reserva de outro aluno, mesmo que fosse a última renovação.',
     },
   },
   {
@@ -338,6 +358,9 @@ export const SCENARIOS: Scenario[] = [
       'Pode ficar de fora: descreve as avaliações regulares, não a substitutiva.',
       'Essencial: prazo, motivos aceitos e onde protocolar o pedido.',
       'Essencial: diz que a substitutiva é única e o que ela cobre.',
+      'Pode ficar de fora: fala de quando NÃO cabe substitutiva, um caso negativo.',
+      'Pode ficar de fora: só relevante pra quem perdeu mais de uma avaliação.',
+      'Pode ficar de fora: fala do resultado final, não de "quando" pode fazer a prova.',
     ],
     llmOptions: [
       {
@@ -354,8 +377,8 @@ export const SCENARIOS: Scenario[] = [
       },
     ],
     invented: {
-      text: 'O pedido da substitutiva tem uma taxa de R$ 50.',
-      why: 'A fonte só pede protocolo na Central de Atendimento; não cita nenhuma taxa.',
+      text: 'Se o aluno perder mais de uma avaliação justificada no semestre, precisa fazer uma prova substitutiva separada para cada data perdida.',
+      why: 'A fonte diz o contrário: uma única substitutiva cobre todas as datas perdidas no mesmo semestre.',
     },
   },
 ];

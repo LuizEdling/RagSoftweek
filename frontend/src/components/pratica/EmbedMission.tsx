@@ -40,7 +40,7 @@ export default function EmbedMission({ question, alreadyDone, onComplete }: Miss
         role="o modelo de embeddings"
         fn="embed(texto) → coordenadas"
         receive={<>a pergunta <strong>"{question}"</strong></>}
-        task="Clique no mapa para colocar a pergunta perto dos documentos que falam do mesmo assunto que ela."
+        task="Clique no mapa para colocar a pergunta perto dos documentos que falam do mesmo assunto que ela. Os nomes dos documentos ficam escondidos até você verificar — só as regiões por assunto aparecem como pista."
         scoring="1 ponto se a pergunta cair dentro da zona verde da posição real."
       />
       <DoneNote show={alreadyDone && !checked} />
@@ -54,6 +54,7 @@ export default function EmbedMission({ question, alreadyDone, onComplete }: Miss
         truthPin={checked ? scenario.pin : null}
         truthRadius={checked ? EMBED_HIT_RADIUS : undefined}
         onPlace={checked ? undefined : (x, y) => setPin({ x, y })}
+        hideDocLabels={!checked}
       />
 
       <ActionRow
